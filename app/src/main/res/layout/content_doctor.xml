@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#f1f9fa"
+    tools:context=".SearchPatientAcitvity">
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_doctor"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/layout_search_patient"
+            android:visibility="visible"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_search_patient"
+                android:hint="Patient Code"
+                android:padding="10dp"
+                android:background="@drawable/et_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_search_patient"
+                android:text="Get Patient"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/pb_search_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_patient"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridView
+            android:id="@+id/gv_patient_home"
+            android:numColumns="2"
+            android:stretchMode="spacingWidthUniform"
+            android:columnWidth="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></GridView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
