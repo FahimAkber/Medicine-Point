@@ -25,11 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                 try {
                     sleep(2000);
                     if(isLogged == true){
-                        if(user.equals("Doctor")){
-                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                        } else if(user.equals("Patient")){
-                            startActivity(new Intent(SplashActivity.this, PatientHomeActivity.class));
-                        }
+                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                     } else{
                         startActivity(new Intent(SplashActivity.this, LogInActivity.class));
                     }

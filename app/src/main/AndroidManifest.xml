@@ -13,7 +13,6 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".DoctorHomeActivity" />
         <activity android:name=".AddMedicineActivity" />
-        <activity android:name=".PatientHomeActivity" />
         <activity android:name=".PatientNewOrderActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -27,7 +26,13 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_doctor"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PatientOrderListActivity" />
+        <activity android:name=".PatientPrescriptionsActivity" />
+        <activity android:name=".DailyMedicineActivity" />
+        <activity android:name=".SellerListActivity" />
+        <activity android:name=".ShopBasedOrdersActivity" />
+        <activity android:name=".PatientPrescriptionDetailsActivity"></activity>
     </application>
 
 </manifest>

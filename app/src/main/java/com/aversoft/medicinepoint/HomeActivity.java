@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aversoft.medicinepoint.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +42,7 @@ public class HomeActivity extends AppCompatActivity
     LinearLayout layoutSearch, layoutDoctor, layoutPatient;
     EditText etSearch;
     Button btnSearch;
-    ProgressBar pbSearch;
+    ProgressBar pbSearch, pbHome;
     GridView gvPatient;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
@@ -49,6 +50,7 @@ public class HomeActivity extends AppCompatActivity
     SharedPreferences sp;
     String myId, userRole;
     User user;
+    String address;
     String[] patientContent;
 
     @Override
@@ -62,16 +64,16 @@ public class HomeActivity extends AppCompatActivity
         getUserInfo();
 
         if(userRole.equals("Doctor")){
+
             layoutDoctor.setVisibility(View.VISIBLE);
             layoutPatient.setVisibility(View.GONE);
 
             getPatients();
 
-
             btnSearch.setOnClickListener(this);
 
-
         } else if(userRole.equals("Patient")){
+
             layoutPatient.setVisibility(View.VISIBLE);
             layoutDoctor.setVisibility(View.GONE);
 
@@ -122,6 +124,8 @@ public class HomeActivity extends AppCompatActivity
         });
 
         gvPatient.setOnItemClickListener(this);
+        gvPatient.setVerticalScrollBarEnabled(false);
+
     }
 
     private void getUserInfo() {
@@ -129,6 +133,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                user =  dataSnapshot.getValue(User.class);
+               pbHome.setVisibility(View.GONE);
             }
 
             @Override
@@ -237,6 +242,7 @@ public class HomeActivity extends AppCompatActivity
         sp = getSharedPreferences("logStatus", MODE_PRIVATE);
         myId = sp.getString("myId", "none");
         userRole = sp.getString("user", "none");
+        pbHome = findViewById(R.id.pb_home);
         patientContent = getResources().getStringArray(R.array.patient_content);
     }
 
@@ -273,14 +279,15 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        address = user.getAddress();
         if(position == 0){
-
+            startActivity(new Intent(HomeActivity.this, PatientNewOrderActivity.class).putExtra("patient_address", address));
         } else if(position == 1){
-
+            startActivity(new Intent(HomeActivity.this, PatientOrderListActivity.class).putExtra("patient_address", address));
         } else if(position == 2){
-
+            startActivity(new Intent(HomeActivity.this, PatientPrescriptionsActivity.class).putExtra("patient_address", address));
         } else if(position == 3){
-
+            startActivity(new Intent(HomeActivity.this, DailyMedicineActivity.class).putExtra("patient_address", address));
         }
     }
 }

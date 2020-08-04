@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="#f1f9fa"
-    tools:context=".SearchPatientAcitvity">
+    tools:context=".HomeActivity">
 
-
+    <ProgressBar
+        android:id="@+id/pb_home"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/layout_doctor"
@@ -60,19 +64,18 @@
         android:id="@+id/layout_patient"
         android:visibility="visible"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <GridView
             android:id="@+id/gv_patient_home"
             android:numColumns="2"
             android:stretchMode="spacingWidthUniform"
             android:columnWidth="120dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></GridView>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
-
-</LinearLayout>
+</FrameLayout>
