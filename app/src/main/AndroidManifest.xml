@@ -32,7 +32,9 @@
         <activity android:name=".DailyMedicineActivity" />
         <activity android:name=".SellerListActivity" />
         <activity android:name=".ShopBasedOrdersActivity" />
-        <activity android:name=".PatientPrescriptionDetailsActivity"></activity>
+        <activity android:name=".PatientPrescriptionDetailsActivity" />
+        <activity android:name=".DailyMedicineListAddActivity" />
+        <activity android:name=".DailyMedicineDetailsActivity"></activity>
     </application>
 
 </manifest>

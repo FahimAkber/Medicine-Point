@@ -177,7 +177,7 @@ public class SellerListActivity extends AppCompatActivity implements AdapterView
                         Calendar calendar = Calendar.getInstance();
                         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
                         DatabaseReference pushRef = reference.child("Order List").child("/" + orderCode).push();
-                        Order order = new Order(orderCode, pushRef.getKey(), myMedicineList, "Delivered", sdf.format(calendar.getTime()));
+                        Order order = new Order(orderCode, pushRef.getKey(), myMedicineList, "Requested", sdf.format(calendar.getTime()));
                         pushRef.setValue(order);
                         startActivity(new Intent(SellerListActivity.this, HomeActivity.class));
                         finish();
