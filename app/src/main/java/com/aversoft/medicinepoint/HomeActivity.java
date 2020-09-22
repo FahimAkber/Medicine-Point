@@ -34,21 +34,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class HomeActivity extends AppCompatActivity
+public class  HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AdapterView.OnItemClickListener {
 
-    LinearLayout layoutSearch, layoutDoctor, layoutPatient;
+    LinearLayout layoutSearch, layoutDoctor, layoutPatient, layoutSeller;
     EditText etSearch;
-    Button btnSearch;
+    Button btnSearch, btnShopRecord, btnShopOrder, btnShopAccepted;
+    TextView tvShopName, tvDate;
     ProgressBar pbSearch, pbHome;
     GridView gvPatient;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     ArrayList<User> allPatient;
     SharedPreferences sp;
-    String myId, userRole;
+    String myId, userRole, myName;
     User user;
     String address;
     String[] patientContent;
@@ -61,12 +64,14 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         init();
+        pbHome.setVisibility(View.VISIBLE);
         getUserInfo();
 
         if(userRole.equals("Doctor")){
 
             layoutDoctor.setVisibility(View.VISIBLE);
             layoutPatient.setVisibility(View.GONE);
+            layoutSeller.setVisibility(View.GONE);
 
             getPatients();
 
@@ -76,8 +81,17 @@ public class HomeActivity extends AppCompatActivity
 
             layoutPatient.setVisibility(View.VISIBLE);
             layoutDoctor.setVisibility(View.GONE);
+            layoutSeller.setVisibility(View.GONE);
 
             setPatientContent();
+
+        } else if(userRole.equals("Saller")){
+
+            layoutSeller.setVisibility(View.VISIBLE);
+            layoutDoctor.setVisibility(View.GONE);
+            layoutPatient.setVisibility(View.GONE);
+
+            setSellerContent();
 
         }
 
@@ -92,6 +106,17 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setSellerContent() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
+        tvShopName.setText(myName);
+        tvDate.setText(sdf.format(Calendar.getInstance().getTime()));
+
+        btnShopOrder.setOnClickListener(this);
+        btnShopAccepted.setOnClickListener(this);
+        btnShopRecord.setOnClickListener(this);
+
     }
 
     private void setPatientContent() {
@@ -133,7 +158,6 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                user =  dataSnapshot.getValue(User.class);
-               pbHome.setVisibility(View.GONE);
             }
 
             @Override
@@ -141,6 +165,7 @@ public class HomeActivity extends AppCompatActivity
 
             }
         });
+        pbHome.setVisibility(View.GONE);
     }
 
     @Override
@@ -231,6 +256,12 @@ public class HomeActivity extends AppCompatActivity
     private void init() {
         layoutDoctor = findViewById(R.id.layout_doctor);
         layoutSearch = findViewById(R.id.layout_search_patient);
+        layoutSeller = findViewById(R.id.layout_seller);
+        tvShopName = findViewById(R.id.tv_seller_home_shop);
+        tvDate = findViewById(R.id.tv_seller_home_date);
+        btnShopOrder = findViewById(R.id.btn_seller_home_order);
+        btnShopRecord = findViewById(R.id.btn_seller_home_summary);
+        btnShopAccepted = findViewById(R.id.btn_seller_home_accepted);
         etSearch = findViewById(R.id.et_search_patient);
         btnSearch = findViewById(R.id.btn_search_patient);
         pbSearch = findViewById(R.id.pb_search_patient);
@@ -241,6 +272,7 @@ public class HomeActivity extends AppCompatActivity
         allPatient = new ArrayList<>();
         sp = getSharedPreferences("logStatus", MODE_PRIVATE);
         myId = sp.getString("myId", "none");
+        myName = sp.getString("myName", "none");
         userRole = sp.getString("user", "none");
         pbHome = findViewById(R.id.pb_home);
         patientContent = getResources().getStringArray(R.array.patient_content);
@@ -274,6 +306,18 @@ public class HomeActivity extends AppCompatActivity
                             .show();
                 }
             }
+        }
+
+        if(v == btnShopOrder){
+            startActivity(new Intent(getApplicationContext(), ShopOrderListActivity.class));
+        }
+
+        if(v == btnShopAccepted){
+            startActivity(new Intent(getApplicationContext(), AcceptedOrdersActivity.class));
+        }
+
+        if(v == btnShopRecord){
+
         }
     }
 

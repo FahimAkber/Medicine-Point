@@ -33,6 +33,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     ActionBar actionBar;
     String[] users;
     String user;
+    String myName;
     String shortCode;
     String myId;
     FirebaseDatabase firebaseDatabase;
@@ -130,7 +131,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
                     shortCode = allUser.get(i).getShortCode();
                     myId = allUser.get(i).getId();
-                    sp.edit().putBoolean("isLogged", true).putString("myId", myId).putString("user", user).putString("shortCode", shortCode).apply();
+                    myName = allUser.get(i).getName();
+                    sp.edit().putBoolean("isLogged", true).putString("myName", myName).putString("myId", myId).putString("user", user).putString("shortCode", shortCode).apply();
 
                     startActivity(new Intent(LogInActivity.this, HomeActivity.class));
                     finish();

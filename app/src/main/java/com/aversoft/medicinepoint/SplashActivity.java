@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 try {
-                    sleep(2000);
+                    sleep(3000);
                     if(isLogged == true){
                         startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                     } else{

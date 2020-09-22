@@ -1,8 +1,11 @@
 package com.aversoft.medicinepoint.model;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     String id;
     String orderId;
+    String patientId;
     String content;
     String status;
     String date;
@@ -10,9 +13,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(String id, String orderId, String content, String status, String date) {
+    public Order(String id, String orderId, String patientId, String content, String status, String date) {
         this.id = id;
         this.orderId = orderId;
+        this.patientId = patientId;
         this.content = content;
         this.status = status;
         this.date = date;
@@ -24,6 +28,10 @@ public class Order {
 
     public String getOrderId() {
         return orderId;
+    }
+
+    public String getPatientId() {
+        return patientId;
     }
 
     public String getContent() {

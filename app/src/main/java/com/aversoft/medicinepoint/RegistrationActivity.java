@@ -151,7 +151,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
             User newUser = new User(pushRef.getKey(), name, number, age, address, password, user, gender, shortCode);
             pushRef.setValue(newUser);
-            sp.edit().putBoolean("isLogged", true).putString("myId", pushRef.getKey()).putString("user", user).putString("shortCode", shortCode).apply();
+            sp.edit().putBoolean("isLogged", true).putString("myName", name).putString("myId", pushRef.getKey()).putString("user", user).putString("shortCode", shortCode).apply();
 
 
             startActivity(new Intent(RegistrationActivity.this, HomeActivity.class));

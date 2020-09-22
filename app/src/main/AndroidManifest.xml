@@ -17,7 +17,6 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -34,7 +33,10 @@
         <activity android:name=".ShopBasedOrdersActivity" />
         <activity android:name=".PatientPrescriptionDetailsActivity" />
         <activity android:name=".DailyMedicineListAddActivity" />
-        <activity android:name=".DailyMedicineDetailsActivity"></activity>
+        <activity android:name=".DailyMedicineDetailsActivity" />
+        <activity android:name=".ShopOrderListActivity" />
+        <activity android:name=".ShopOrderDetailsActivity" />
+        <activity android:name=".AcceptedOrdersActivity"></activity>
     </application>
 
 </manifest>

@@ -39,7 +39,7 @@ public class SellerListActivity extends AppCompatActivity implements AdapterView
     String myMedicineList, patientAddress;
     ArrayList<User> allSeller;
     SharedPreferences sp;
-    String myCode;
+    String myCode, myId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +160,7 @@ public class SellerListActivity extends AppCompatActivity implements AdapterView
         allSeller = new ArrayList<>();
         sp = getSharedPreferences("logStatus", MODE_PRIVATE);
         myCode = sp.getString("shortCode", "none");
+        myId = sp.getString("myId", "none");
     }
 
     @Override
@@ -177,7 +178,7 @@ public class SellerListActivity extends AppCompatActivity implements AdapterView
                         Calendar calendar = Calendar.getInstance();
                         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
                         DatabaseReference pushRef = reference.child("Order List").child("/" + orderCode).push();
-                        Order order = new Order(orderCode, pushRef.getKey(), myMedicineList, "Requested", sdf.format(calendar.getTime()));
+                        Order order = new Order(orderCode, pushRef.getKey(), myId, myMedicineList, "Requested", sdf.format(calendar.getTime()));
                         pushRef.setValue(order);
                         startActivity(new Intent(SellerListActivity.this, HomeActivity.class));
                         finish();
