@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -29,6 +30,7 @@ public class PreviousPrescriptionActiivity extends AppCompatActivity {
     DatabaseReference reference;
     ActionBar actionBar;
     Intent intent;
+    String prescriptionId;
     ArrayList<Prescription> allPrescription;
 
     @Override
@@ -37,6 +39,9 @@ public class PreviousPrescriptionActiivity extends AppCompatActivity {
         setContentView(R.layout.activity_previous_prescription_actiivity);
 
         init();
+
+        actionBar.setTitle("Previous Prescriptions");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getValue();
 
@@ -49,6 +54,14 @@ public class PreviousPrescriptionActiivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     BaseAdapter adapter = new BaseAdapter() {
@@ -100,9 +113,9 @@ public class PreviousPrescriptionActiivity extends AppCompatActivity {
         tvPrePresOne = findViewById(R.id.tv_pre_pres_one);
         lvPrePresContainer = findViewById(R.id.lv_pre_pres_container);
         intent = getIntent();
-        String prescrptionId = intent.getStringExtra("prescriptionId");
+        prescriptionId = intent.getStringExtra("prescriptionId");
         firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference("Medicine Point DB/Prescription/"+prescrptionId);
+        reference = firebaseDatabase.getReference("Medicine Point DB/Prescription/"+prescriptionId);
         actionBar = getSupportActionBar();
         allPrescription = new ArrayList<>();
     }

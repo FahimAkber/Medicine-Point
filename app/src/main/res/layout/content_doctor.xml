@@ -32,14 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/et_search_patient"
-                android:hint="Patient Code"
-                android:padding="10dp"
-                android:background="@drawable/et_bg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <Button
                 android:id="@+id/btn_search_patient"
                 android:text="Get Patient"

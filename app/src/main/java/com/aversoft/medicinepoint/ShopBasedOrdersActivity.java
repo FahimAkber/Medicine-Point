@@ -3,8 +3,10 @@ package com.aversoft.medicinepoint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -29,6 +31,7 @@ public class ShopBasedOrdersActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     ArrayList<Order> allOrders;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,21 @@ public class ShopBasedOrdersActivity extends AppCompatActivity {
 
         init();
 
+        actionBar.setTitle("Today's Order");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         getOrders();
 
         lvOrder.setAdapter(adapter);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     BaseAdapter adapter = new BaseAdapter() {
@@ -108,5 +122,6 @@ public class ShopBasedOrdersActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         allOrders = new ArrayList<>();
         reference = firebaseDatabase.getReference("Medicine Point DB");
+        actionBar = getSupportActionBar();
     }
 }

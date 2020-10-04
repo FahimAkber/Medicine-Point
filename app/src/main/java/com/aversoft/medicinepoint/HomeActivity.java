@@ -3,8 +3,10 @@ package com.aversoft.medicinepoint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -33,6 +35,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,7 +51,6 @@ public class  HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AdapterView.OnItemClickListener {
 
     LinearLayout layoutSearch, layoutDoctor, layoutPatient, layoutSeller;
-    EditText etSearch;
     Button btnSearch, btnShopRecord, btnShopOrder, btnShopAccepted;
     TextView tvShopName, tvDate;
     ProgressBar pbSearch, pbHome;
@@ -210,15 +218,16 @@ public class  HomeActivity extends AppCompatActivity
             sp.edit().putBoolean("isLogged", false).putString("user", "none").putString("shortCode", null).apply();
             startActivity(new Intent(HomeActivity.this, SplashActivity.class));
             finish();
-        } else if(id == R.id.item_about_me){
+        }
+        if(id == R.id.item_about_me){
             new AlertDialog.Builder(HomeActivity.this)
                     .setTitle("My Self")
                     .setMessage(
                             "Name: "+user.getName()
-                            + "Age: "+user.getAge()
-                            + "Gender: "+user.getGender()
-                            + "Identity: "+user.getShortCode()
-                            + "Address: "+user.getAddress())
+                            + "\nAge: "+user.getAge()
+                            + "\nGender: "+user.getGender()
+                            + "\nIdentity: "+user.getShortCode()
+                            + "\nAddress: "+user.getAddress())
                     .setCancelable(false)
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
@@ -227,8 +236,12 @@ public class  HomeActivity extends AppCompatActivity
                         }
                     })
                     .show();
-        } else if(id == R.id.item_medicine_point){
+        }
+        if(id == R.id.item_medicine_point){
 
+        }
+        if(id == R.id.item_qr){
+            startActivity(new Intent(getApplicationContext(), QRActivity.class).putExtra("shortCode", user.getShortCode() ));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -262,7 +275,6 @@ public class  HomeActivity extends AppCompatActivity
         btnShopOrder = findViewById(R.id.btn_seller_home_order);
         btnShopRecord = findViewById(R.id.btn_seller_home_summary);
         btnShopAccepted = findViewById(R.id.btn_seller_home_accepted);
-        etSearch = findViewById(R.id.et_search_patient);
         btnSearch = findViewById(R.id.btn_search_patient);
         pbSearch = findViewById(R.id.pb_search_patient);
         layoutPatient = findViewById(R.id.layout_patient);
@@ -284,7 +296,50 @@ public class  HomeActivity extends AppCompatActivity
             layoutSearch.setVisibility(View.GONE);
             pbSearch.setVisibility(View.VISIBLE);
 
-            String patient = etSearch.getText().toString().trim();
+            IntentIntegrator intentIntegrator = new IntentIntegrator(this);
+            intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+            intentIntegrator.setPrompt("Scanning");
+            intentIntegrator.setBarcodeImageEnabled(true);
+            intentIntegrator.setBeepEnabled(true);
+            intentIntegrator.setOrientationLocked(false);
+            intentIntegrator.setCameraId(0);
+            intentIntegrator.initiateScan();
+
+        }
+
+        if(v == btnShopOrder){
+            startActivity(new Intent(getApplicationContext(), ShopOrderListActivity.class));
+        }
+
+        if(v == btnShopAccepted){
+            startActivity(new Intent(getApplicationContext(), AcceptedOrdersActivity.class));
+        }
+
+        if(v == btnShopRecord){
+            startActivity(new Intent(getApplicationContext(), ShopRecordsActivity.class));
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        address = user.getAddress();
+        if(position == 0){
+            startActivity(new Intent(HomeActivity.this, PatientNewOrderActivity.class).putExtra("patient_address", address));
+        } else if(position == 1){
+            startActivity(new Intent(HomeActivity.this, PatientOrderListActivity.class).putExtra("patient_address", address));
+        } else if(position == 2){
+            startActivity(new Intent(HomeActivity.this, PatientPrescriptionsActivity.class).putExtra("patient_address", address));
+        } else if(position == 3){
+            startActivity(new Intent(HomeActivity.this, DailyMedicineActivity.class).putExtra("patient_address", address));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(intentResult != null && intentResult.getContents() != null){
+            String patient = intentResult.getContents();
             for (int i = 0; i < allPatient.size(); i++){
                 if(allPatient.get(i).getShortCode().equals(patient)) {
                     pbSearch.setVisibility(View.GONE);
@@ -306,32 +361,6 @@ public class  HomeActivity extends AppCompatActivity
                             .show();
                 }
             }
-        }
-
-        if(v == btnShopOrder){
-            startActivity(new Intent(getApplicationContext(), ShopOrderListActivity.class));
-        }
-
-        if(v == btnShopAccepted){
-            startActivity(new Intent(getApplicationContext(), AcceptedOrdersActivity.class));
-        }
-
-        if(v == btnShopRecord){
-
-        }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        address = user.getAddress();
-        if(position == 0){
-            startActivity(new Intent(HomeActivity.this, PatientNewOrderActivity.class).putExtra("patient_address", address));
-        } else if(position == 1){
-            startActivity(new Intent(HomeActivity.this, PatientOrderListActivity.class).putExtra("patient_address", address));
-        } else if(position == 2){
-            startActivity(new Intent(HomeActivity.this, PatientPrescriptionsActivity.class).putExtra("patient_address", address));
-        } else if(position == 3){
-            startActivity(new Intent(HomeActivity.this, DailyMedicineActivity.class).putExtra("patient_address", address));
         }
     }
 }

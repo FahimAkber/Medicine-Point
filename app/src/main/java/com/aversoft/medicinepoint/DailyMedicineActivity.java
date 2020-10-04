@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,6 +36,7 @@ public class DailyMedicineActivity extends AppCompatActivity implements View.OnC
     DatabaseReference reference;
     Intent intent;
     String address;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class DailyMedicineActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_daily_medicine);
 
         init();
+
+        actionBar.setTitle("Daily Medicine");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getValue();
 
@@ -50,6 +56,14 @@ public class DailyMedicineActivity extends AppCompatActivity implements View.OnC
 
         lvDailyMedicine.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getValue() {
@@ -106,6 +120,7 @@ public class DailyMedicineActivity extends AppCompatActivity implements View.OnC
         myCode = sp.getString("myId", "none");
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Medicine Point DB/Daily Medicine/");
+        actionBar = getSupportActionBar();
     }
 
     @Override

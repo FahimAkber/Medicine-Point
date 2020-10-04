@@ -2,10 +2,12 @@ package com.aversoft.medicinepoint;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ public class ShopOrderDetailsActivity extends AppCompatActivity implements View.
     Order order;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +33,23 @@ public class ShopOrderDetailsActivity extends AppCompatActivity implements View.
 
         init();
 
+        actionBar.setTitle("Order Details");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         tvDate.setText(order.getDate());
         tvStatus.setText(order.getStatus());
         tvMedicine.setText(order.getContent());
 
         btnAccept.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {
@@ -48,6 +62,7 @@ public class ShopOrderDetailsActivity extends AppCompatActivity implements View.
         order = (Order) intent.getSerializableExtra("order");
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Medicine Point DB/Order List/"+order.getId()+"/"+order.getOrderId());
+        actionBar = getSupportActionBar();
     }
 
     @Override

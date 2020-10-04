@@ -12,5 +12,8 @@
     <item
         android:title="Medicine Point"
         android:id="@+id/item_medicine_point"/>
+    <item
+        android:title="My QR"
+        android:id="@+id/item_qr"/>
 
 </menu>

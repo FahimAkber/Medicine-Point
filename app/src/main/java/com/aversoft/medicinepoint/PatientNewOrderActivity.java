@@ -1,9 +1,11 @@
 package com.aversoft.medicinepoint;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,6 +26,7 @@ public class PatientNewOrderActivity extends AppCompatActivity implements View.O
     ArrayList<String> allMedicine;
     Intent intent;
     String patientAddress;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,23 @@ public class PatientNewOrderActivity extends AppCompatActivity implements View.O
 
         init();
 
+        actionBar.setTitle("New Order");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         btnOk.setOnClickListener(this);
         btnConfirm.setOnClickListener(this);
 
         lvMedicine.setAdapter(adapter);
         lvMedicine.setOnItemLongClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     BaseAdapter adapter = new BaseAdapter() {
@@ -75,6 +89,7 @@ public class PatientNewOrderActivity extends AppCompatActivity implements View.O
         btnConfirm = findViewById(R.id.btn_patient_new_order_confirm_order);
         allMedicine = new ArrayList<>();
         intent = getIntent();
+        actionBar = getSupportActionBar();
         patientAddress = intent.getStringExtra("patient_address");
     }
 

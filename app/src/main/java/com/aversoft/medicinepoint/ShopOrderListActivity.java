@@ -3,9 +3,11 @@ package com.aversoft.medicinepoint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -36,6 +38,7 @@ public class ShopOrderListActivity extends AppCompatActivity implements AdapterV
     ProgressBar pbShopOrderList;
     LinearLayout layoutShopOderList;
     ArrayList<Order> myOrders;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,9 @@ public class ShopOrderListActivity extends AppCompatActivity implements AdapterV
         setContentView(R.layout.activity_shop_order_list);
 
         init();
+
+        actionBar.setTitle("Orders");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         layoutShopOderList.setVisibility(View.GONE);
         pbShopOrderList.setVisibility(View.VISIBLE);
@@ -54,6 +60,14 @@ public class ShopOrderListActivity extends AppCompatActivity implements AdapterV
         lvShopOrder.setAdapter(adapter);
         lvShopOrder.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     BaseAdapter adapter = new BaseAdapter() {
@@ -139,6 +153,7 @@ public class ShopOrderListActivity extends AppCompatActivity implements AdapterV
         myOrders = new ArrayList<>();
         pbShopOrderList = findViewById(R.id.pb_shop_order_list);
         layoutShopOderList = findViewById(R.id.layout_shop_order_list);
+        actionBar = getSupportActionBar();
     }
 
     @Override

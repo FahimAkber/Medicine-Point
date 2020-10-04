@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class DoctorHomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class  DoctorHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvDate, tvDetails;
     Button btnMedicineAdd, btnPrescribe;
@@ -55,17 +55,14 @@ public class DoctorHomeActivity extends AppCompatActivity implements View.OnClic
 
         init();
 
-        setActionView();
+        actionBar.setTitle("Prescribe");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         
         tvDetails.setText(userInfo);
         tvDate.setOnClickListener(this);
         btnMedicineAdd.setOnClickListener(this);
         lvMedicineList.setAdapter(adapter);
         btnPrescribe.setOnClickListener(this);
-
-    }
-
-    private void setActionView() {
 
     }
 
@@ -210,6 +207,9 @@ public class DoctorHomeActivity extends AppCompatActivity implements View.OnClic
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.doctor_home_menu_previous_prescription){
             startActivity(new Intent(DoctorHomeActivity.this, PreviousPrescriptionActiivity.class).putExtra("prescriptionId", prescriptionId));
+        }
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

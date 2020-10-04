@@ -3,10 +3,12 @@ package com.aversoft.medicinepoint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -36,6 +38,7 @@ public class PatientOrderListActivity extends AppCompatActivity implements Adapt
     ArrayList<User> allSeller;
     SharedPreferences sp;
     String myCode;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,9 @@ public class PatientOrderListActivity extends AppCompatActivity implements Adapt
         setContentView(R.layout.activity_patient_order_list);
 
         init();
+
+        actionBar.setTitle("Order List");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getSellers();
 
@@ -69,6 +75,14 @@ public class PatientOrderListActivity extends AppCompatActivity implements Adapt
 
         lvShop.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getYourShop(final String shop) {
@@ -156,6 +170,7 @@ public class PatientOrderListActivity extends AppCompatActivity implements Adapt
         address = intent.getStringExtra("patient_address");
         sp = getSharedPreferences("logStatus", MODE_PRIVATE);
         myCode = sp.getString("shortCode", "none");
+        actionBar = getSupportActionBar();
     }
 
     @Override

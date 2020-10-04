@@ -4,11 +4,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,12 +42,16 @@ public class SellerListActivity extends AppCompatActivity implements AdapterView
     ArrayList<User> allSeller;
     SharedPreferences sp;
     String myCode, myId;
+    ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_list);
 
         init();
+
+        actionBar.setTitle("Nearest Seller");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getSellers();
 
@@ -72,6 +78,14 @@ public class SellerListActivity extends AppCompatActivity implements AdapterView
 
         lvSeller.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getYourShop(final String shop) {
@@ -161,6 +175,7 @@ public class SellerListActivity extends AppCompatActivity implements AdapterView
         sp = getSharedPreferences("logStatus", MODE_PRIVATE);
         myCode = sp.getString("shortCode", "none");
         myId = sp.getString("myId", "none");
+        actionBar = getSupportActionBar();
     }
 
     @Override

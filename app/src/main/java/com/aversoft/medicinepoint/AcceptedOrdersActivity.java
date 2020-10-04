@@ -1,11 +1,15 @@
 package com.aversoft.medicinepoint;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AcceptedOrdersActivity extends AppCompatActivity {
+public class AcceptedOrdersActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ProgressBar pbAccept;
     LinearLayout layoutAccept;
@@ -33,6 +37,7 @@ public class AcceptedOrdersActivity extends AppCompatActivity {
     SharedPreferences sp;
     String today, myCode;
     ArrayList<Order> allOrder;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class AcceptedOrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accepted_orders);
 
         init();
+
+        actionBar.setTitle("Accepted Order");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         layoutAccept.setVisibility(View.GONE);
         pbAccept.setVisibility(View.VISIBLE);
@@ -49,7 +57,16 @@ public class AcceptedOrdersActivity extends AppCompatActivity {
         getOrders();
 
         lvAccept.setAdapter(adapter);
+        lvAccept.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     BaseAdapter adapter = new BaseAdapter() {
@@ -136,5 +153,11 @@ public class AcceptedOrdersActivity extends AppCompatActivity {
         sp = getSharedPreferences("logStatus", MODE_PRIVATE);
         myCode = sp.getString("shortCode", "none");
         allOrder = new ArrayList<>();
+        actionBar = getSupportActionBar();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        startActivity(new Intent(getApplicationContext(), AcceptedOrderDetailsActivity.class).putExtra("order", allOrder.get(position)));
     }
 }

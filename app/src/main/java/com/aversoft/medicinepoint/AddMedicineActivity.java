@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -34,6 +35,8 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_add_medicine);
 
         init();
+        actionBar.setTitle("Add Medicine");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         cbMorning.setOnCheckedChangeListener(this);
         cbAfterNoon.setOnCheckedChangeListener(this);
         cbEvening.setOnCheckedChangeListener(this);
@@ -41,6 +44,14 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
         rgPeriod.setOnCheckedChangeListener(this);
         btnAddMedicine.setOnClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {

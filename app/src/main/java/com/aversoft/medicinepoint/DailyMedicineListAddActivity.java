@@ -2,8 +2,10 @@ package com.aversoft.medicinepoint;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ public class DailyMedicineListAddActivity extends AppCompatActivity implements V
     DatabaseReference reference;
     SharedPreferences sp;
     String myCode;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,20 @@ public class DailyMedicineListAddActivity extends AppCompatActivity implements V
 
         init();
 
+        actionBar.setTitle("Add List");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         btnMedicine.setOnClickListener(this);
         btnAddToList.setOnClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {
@@ -49,6 +63,7 @@ public class DailyMedicineListAddActivity extends AppCompatActivity implements V
         sp = getSharedPreferences("logStatus", MODE_PRIVATE);
         myCode = sp.getString("myId", "none");
         reference = firebaseDatabase.getReference("Medicine Point DB/Daily Medicine");
+        actionBar = getSupportActionBar();
     }
 
     @Override

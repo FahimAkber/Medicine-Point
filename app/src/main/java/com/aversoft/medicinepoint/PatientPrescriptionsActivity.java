@@ -3,9 +3,11 @@ package com.aversoft.medicinepoint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,6 +36,7 @@ public class PatientPrescriptionsActivity extends AppCompatActivity implements A
     Intent intent;
     String address;
     ArrayList<Prescription> myPrescription;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class PatientPrescriptionsActivity extends AppCompatActivity implements A
         setContentView(R.layout.activity_patient_prescriptions);
 
         init();
+
+        actionBar.setTitle("My Prescriptions");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         pbPatientPres.setVisibility(View.VISIBLE);
         lvPatientPresList.setVisibility(View.GONE);
@@ -51,6 +57,14 @@ public class PatientPrescriptionsActivity extends AppCompatActivity implements A
 
         lvPatientPresList.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     BaseAdapter adapter = new BaseAdapter() {
@@ -125,6 +139,7 @@ public class PatientPrescriptionsActivity extends AppCompatActivity implements A
         myPrescription = new ArrayList<>();
         intent = getIntent();
         address = intent.getStringExtra("patient_address");
+        actionBar = getSupportActionBar();
     }
 
     @Override
