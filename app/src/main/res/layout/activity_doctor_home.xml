@@ -32,19 +32,18 @@
 
     </LinearLayout>
 
-    <TextView
+    <Button
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="10dp"
         android:gravity="center"
+        android:textAllCaps="false"
+        android:textColor="#f909a795"
         android:id="@+id/tv_doctor_home_date"
         android:background="@drawable/date_time_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Date"/>
-
-
-
+        android:text="Previous Prescription"/>
 
     <LinearLayout
         android:layout_marginTop="5dp"

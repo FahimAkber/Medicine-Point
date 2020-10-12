@@ -1,6 +1,5 @@
 package com.aversoft.medicinepoint;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
@@ -30,8 +29,8 @@ import java.util.Calendar;
 
 public class  DoctorHomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView tvDate, tvDetails;
-    Button btnMedicineAdd, btnPrescribe;
+    TextView tvDetails;
+    Button btnMedicineAdd, btnPrescribe, btnPrevious;
     ListView lvMedicineList;
     ActionBar actionBar;
     Intent intent;
@@ -41,7 +40,6 @@ public class  DoctorHomeActivity extends AppCompatActivity implements View.OnCli
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
     SharedPreferences sp;
-    int dateCount = 0;
     String myCode;
     String userInfo;
     String prescriptionId;
@@ -59,7 +57,7 @@ public class  DoctorHomeActivity extends AppCompatActivity implements View.OnCli
         actionBar.setDisplayHomeAsUpEnabled(true);
         
         tvDetails.setText(userInfo);
-        tvDate.setOnClickListener(this);
+        btnPrevious.setOnClickListener(this);
         btnMedicineAdd.setOnClickListener(this);
         lvMedicineList.setAdapter(adapter);
         btnPrescribe.setOnClickListener(this);
@@ -107,7 +105,7 @@ public class  DoctorHomeActivity extends AppCompatActivity implements View.OnCli
     };
 
     private void init() {
-        tvDate = findViewById(R.id.tv_doctor_home_date);
+        btnPrevious = findViewById(R.id.tv_doctor_home_date);
         btnMedicineAdd = findViewById(R.id.btn_DoctorHome_add_medicine);
         btnPrescribe = findViewById(R.id.btn_DoctorHOme_Prescribe);
         lvMedicineList = findViewById(R.id.lv_DoctorHome_MedicineList);
@@ -127,23 +125,8 @@ public class  DoctorHomeActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (v == tvDate) {
-            dateCount = 1;
-            DatePickerDialog.OnDateSetListener ods = new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    calendar.set(Calendar.YEAR, year);
-                    calendar.set(Calendar.MONTH, month);
-                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                    String format = "dd MMM yyyy";
-                    SimpleDateFormat sdf = new SimpleDateFormat(format);
-                    tvDate.setText(sdf.format(calendar.getTime()));
-
-                }
-            };
-            DatePickerDialog dpd = new DatePickerDialog(DoctorHomeActivity.this, ods, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-            dpd.show();
+        if (v == btnPrevious) {
+            startActivity(new Intent(DoctorHomeActivity.this, PreviousPrescriptionActiivity.class).putExtra("prescriptionId", prescriptionId));
         }
 
         if (v == btnMedicineAdd) {
@@ -165,20 +148,18 @@ public class  DoctorHomeActivity extends AppCompatActivity implements View.OnCli
 
             }
 
-            if (dateCount == 0) {
-                Toast.makeText(this, "Select the date!!!", Toast.LENGTH_SHORT).show();
-                return;
-            }
             if (presMedicine.size() == 0) {
                 Toast.makeText(this, "Please add a medicine!!!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             String presContainer = userInfo + "\n" + prescription;
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy");
 
             DatabaseReference child = reference.child(prescriptionId);
             DatabaseReference push = child.push();
-            Prescription prescribe = new Prescription(prescriptionId, push.getKey(), tvDate.getText().toString().trim(), presContainer);
+            Prescription prescribe = new Prescription(prescriptionId, push.getKey(), sdf.format(calendar.getTime()), presContainer);
             push.setValue(prescribe);
 
             startActivity(new Intent(DoctorHomeActivity.this, HomeActivity.class));
@@ -197,17 +178,10 @@ public class  DoctorHomeActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.doctor_home_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.doctor_home_menu_previous_prescription){
-            startActivity(new Intent(DoctorHomeActivity.this, PreviousPrescriptionActiivity.class).putExtra("prescriptionId", prescriptionId));
-        }
+
         if(item.getItemId() == android.R.id.home){
             onBackPressed();
         }

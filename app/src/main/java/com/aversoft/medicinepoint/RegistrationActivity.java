@@ -139,9 +139,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             }
             if(gender.isEmpty()){
                 Toast.makeText(this, "Select your gender!!!", Toast.LENGTH_SHORT).show();
+                return;
             }
             if(user.isEmpty()){
                 Toast.makeText(this, "Select User Role!!!", Toast.LENGTH_SHORT).show();
+                return;
             }
 
             DatabaseReference childRef  = reference.child("/User/"+user);
