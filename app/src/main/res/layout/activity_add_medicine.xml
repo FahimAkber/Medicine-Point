@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:background="#f1f9fa"
+    android:layout_height="match_parent"
+    tools:context=".AddMedicineActivity">
+
+    <EditText
+        android:id="@+id/et_add_medicine_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Medicine name"
+        android:paddingLeft="5dp"
+        android:inputType="text"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Time"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/cb_morning"
+            android:text="Morning"
+            android:textSize="22sp"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/cb_afternooon"
+            android:text="Afternoon"
+            android:textSize="22sp"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/cb_Evening"
+            android:text="Evening"
+            android:textSize="22sp"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/cb_Night"
+            android:text="Night"
+            android:textSize="22sp"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+    </LinearLayout>
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Period"
+        android:textSize="18sp"/>
+
+    <RadioGroup
+        android:id="@+id/rg_timePeriod"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:textSize="22sp"
+            android:layout_width="match_parent"
+            android:paddingLeft="5dp"
+            android:id="@+id/rb_before_meal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Before meal"/>
+
+        <RadioButton
+            android:textSize="22sp"
+            android:paddingLeft="5dp"
+            android:id="@+id/rb_after_meal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="After meal"/>
+
+
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_add_medicine"
+        android:text="Add Medicine"
+        android:textSize="22dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:background="@drawable/button_bg"
+        android:textAllCaps="false"
+        android:textColor="#f909a795"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

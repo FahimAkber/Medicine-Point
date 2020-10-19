@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1054849046625",
+    "firebase_url": "https://medicinepoint-21998.firebaseio.com",
+    "project_id": "medicinepoint-21998",
+    "storage_bucket": "medicinepoint-21998.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054849046625:android:dc4ab42576d29cde463220",
+        "android_client_info": {
+          "package_name": "com.aversoft.medicinepoint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054849046625-jbqblovum0osg45t3f317g22vrk77iss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aversoft.medicinepoint",
+            "certificate_hash": "d0b5de22595ef7fc911c3ef27d42af06933e6ca6"
+          }
+        },
+        {
+          "client_id": "1054849046625-tgep6j4bl0jetr2joidbo2l1h02qjrah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzTWvPDFRuwdj0DZlLJQ2fmtSXk8QnrGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054849046625-tgep6j4bl0jetr2joidbo2l1h02qjrah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

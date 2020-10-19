@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Medicine Point</string>
+    <string-array name="user_role">
+        <item>Doctor</item>
+        <item>Patient</item>
+        <item>Saller</item>
+    </string-array>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="patient_content">
+        <item>New Order</item>
+        <item>Order List</item>
+        <item>My Prescription</item>
+        <item>Daily Medicine</item>
+    </string-array>
+
+    <string name="title_activity_doctor">DoctorActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>
