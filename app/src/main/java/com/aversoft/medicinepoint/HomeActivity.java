@@ -301,7 +301,7 @@ public class  HomeActivity extends AppCompatActivity
             intentIntegrator.setPrompt("Scanning");
             intentIntegrator.setBarcodeImageEnabled(true);
             intentIntegrator.setBeepEnabled(true);
-            intentIntegrator.setOrientationLocked(false);
+            intentIntegrator.setOrientationLocked(true);
             intentIntegrator.setCameraId(0);
             intentIntegrator.initiateScan();
 
