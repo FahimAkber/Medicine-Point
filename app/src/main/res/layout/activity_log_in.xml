@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="center"
+    android:background="#f1f9fa"
+    tools:context=".LogInActivity">
+
+    <TextView
+        android:text="User Log In"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:textColor="#f909a795"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_log_in_number"
+        android:layout_marginTop="15dp"
+        android:textSize="22sp"
+        android:background="@drawable/et_bg"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:hint="Number"
+        android:inputType="number"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/et_log_in_password"
+        android:layout_marginTop="5dp"
+        android:textSize="22sp"
+        android:background="@drawable/et_bg"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/date_time_bg"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Select Role"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <Spinner
+            android:id="@+id/sp_log_in_role"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+        </Spinner>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_log_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#f909a795"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:text="Log In"
+        android:background="@drawable/button_bg"
+        android:textSize="22sp"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="New here!!"
+            android:textSize="20sp"
+            android:textColor="#f909a795"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:paddingLeft="10dp"
+            android:text="Sign Up First"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:id="@+id/tv_log_in_sign_up"
+            android:textColor="#ccfc5757"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>
