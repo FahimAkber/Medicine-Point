@@ -34,13 +34,11 @@
 
     <Button
         android:textSize="20sp"
-        android:textStyle="bold"
         android:padding="10dp"
-        android:gravity="center"
         android:textAllCaps="false"
-        android:textColor="#f909a795"
+        android:textColor="#5b7784"
         android:id="@+id/tv_doctor_home_date"
-        android:background="@drawable/date_time_bg"
+        android:background="@drawable/button_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Previous Prescription"/>
@@ -64,11 +62,11 @@
             android:gravity="center"
             android:id="@+id/btn_DoctorHome_add_medicine"
             android:layout_width="wrap_content"
-            android:background="@drawable/date_time_bg"
-            android:textColor="#f909a795"
+            android:background="@drawable/button_bg"
+            android:textColor="#5b7784"
             android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:text="+" />
 
     </LinearLayout>
@@ -89,13 +87,12 @@
             android:id="@+id/btn_DoctorHOme_Prescribe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="#f909a795"
+            android:textColor="#5b7784"
             android:layout_marginTop="10dp"
             android:textAllCaps="false"
             android:text="Prescribe"
             android:background="@drawable/button_bg"
-            android:textSize="22sp"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 

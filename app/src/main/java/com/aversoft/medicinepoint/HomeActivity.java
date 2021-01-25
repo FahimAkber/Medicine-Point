@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -61,8 +62,15 @@ public class  HomeActivity extends AppCompatActivity
     SharedPreferences sp;
     String myId, userRole, myName;
     User user;
+    ActionBar actionBar;
     String address;
     String[] patientContent;
+    int[] patientIcon = {
+            R.drawable.ic_writing,
+            R.drawable.ic_order_list,
+            R.drawable.ic_prescription,
+            R.drawable.ic_regular_medicine
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,7 @@ public class  HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         init();
+        actionBar.setTitle("Welcome");
         pbHome.setVisibility(View.VISIBLE);
         getUserInfo();
 
@@ -151,6 +160,7 @@ public class  HomeActivity extends AppCompatActivity
                 ImageView ivPatientContent = convertView.findViewById(R.id.iv_patient_content_container);
                 TextView tvPatientContent = convertView.findViewById(R.id.tv_patient_content_container);
 
+                ivPatientContent.setImageResource(patientIcon[position]);
                 tvPatientContent.setText(patientContent[position]);
                 return convertView;
             }
@@ -186,27 +196,27 @@ public class  HomeActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.doctor, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.doctor, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -238,7 +248,7 @@ public class  HomeActivity extends AppCompatActivity
                     .show();
         }
         if(id == R.id.item_medicine_point){
-
+            startActivity(new Intent(getApplicationContext(), AboutMedicinePoint.class));
         }
         if(id == R.id.item_qr){
             startActivity(new Intent(getApplicationContext(), QRActivity.class).putExtra("shortCode", user.getShortCode() ));
@@ -279,6 +289,7 @@ public class  HomeActivity extends AppCompatActivity
         pbSearch = findViewById(R.id.pb_search_patient);
         layoutPatient = findViewById(R.id.layout_patient);
         gvPatient = findViewById(R.id.gv_patient_home);
+        actionBar = getSupportActionBar();
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Medicine Point DB/User/");
         allPatient = new ArrayList<>();
@@ -288,6 +299,7 @@ public class  HomeActivity extends AppCompatActivity
         userRole = sp.getString("user", "none");
         pbHome = findViewById(R.id.pb_home);
         patientContent = getResources().getStringArray(R.array.patient_content);
+
     }
 
     @Override
@@ -345,7 +357,8 @@ public class  HomeActivity extends AppCompatActivity
                     pbSearch.setVisibility(View.GONE);
                     startActivity(new Intent(HomeActivity.this, DoctorHomeActivity.class).putExtra("user", allPatient.get(i)));
                     finish();
-                } else{
+                }
+                if(i == allPatient.size()-1){
                     pbSearch.setVisibility(View.GONE);
                     new AlertDialog.Builder(HomeActivity.this)
                             . setTitle("Warning")
@@ -361,6 +374,9 @@ public class  HomeActivity extends AppCompatActivity
                             .show();
                 }
             }
+        }else{
+            pbSearch.setVisibility(View.GONE);
+            layoutSearch.setVisibility(View.VISIBLE);
         }
     }
 }

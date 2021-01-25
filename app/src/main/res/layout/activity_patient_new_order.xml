@@ -34,8 +34,7 @@
                     android:hint="Medicine Name"
                     android:textSize="22sp"
                     android:inputType="text"
-                    android:paddingLeft="5dp"
-                    android:textStyle="bold"/>
+                    android:paddingLeft="5dp"/>
 
                 <EditText
                     android:id="@+id/et_patient_new_order_quantity"
@@ -44,8 +43,7 @@
                     android:hint="Quantity"
                     android:textSize="22sp"
                     android:inputType="number"
-                    android:paddingLeft="5dp"
-                    android:textStyle="bold"/>
+                    android:paddingLeft="5dp"/>
 
             </LinearLayout>
 
@@ -54,14 +52,13 @@
                 android:padding="10dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/button_bg"
-                android:textColor="#f909a795"
+                android:textColor="#5b7784"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:textAllCaps="false"
                 android:layout_height="wrap_content"
                 android:text="Ok"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
+                android:textSize="20sp"/>
 
         </LinearLayout>
 
@@ -90,13 +87,12 @@
                 android:id="@+id/btn_patient_new_order_confirm_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="#f909a795"
+                android:textColor="#5b7784"
                 android:layout_marginTop="10dp"
                 android:textAllCaps="false"
                 android:text="Confirm Order"
                 android:background="@drawable/button_bg"
-                android:textSize="22sp"/>
+                android:textSize="20sp"/>
 
         </LinearLayout>
 

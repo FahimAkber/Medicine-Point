@@ -137,7 +137,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(new Intent(LogInActivity.this, HomeActivity.class));
                     finish();
 
-                } else {
+                }
+                if(i == allUser.size()-1){
                     Toast.makeText(this, "Invalid Entry!!!", Toast.LENGTH_SHORT).show();
                 }
             }

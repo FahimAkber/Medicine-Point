@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#f1f9fa"
+    tools:context=".AboutMedicinePoint">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="#B3E8BE"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:fontFamily="casual"
+                android:text="\nAn app that can solve medicine related obstracle of patient and medicine seller.\n \n In our country there are two or three people in every family who need to take medicine regularly and some patients require a certain amount of medicine per month. But sometimes, when they go for taking medicine, they see that their medicine is over, and sometimes they forget to buy medicine. That’s why they are unable to take medicine in time.
+\n\n   On the other hand, many drug dealers want to use such kind of online platform that helps them to make more sales and accurate calculation. They want to provide an online based home delivery service to the customer.
+\n\n So, we decide to make such kind of online platform where customer can order medicine at anytime from anywhere and can get his/her product at home and drug seller can accept online order which are nearest to him and provide specific product (Ordered Product) to the customer.\n\n Provide a service to patient like ‘Medicine Home Delivery’ and provide another service to drug dealers like ‘Online Shop’ with offering more sales and maintenance all calculation.\n\nWe Offer:\n1.	One App for customer where customer can order medicine according to their requirement, can see their previous order, can set their favorite medicine shop. (etc.)
+\n2.	 Drug dealer  can accept their nearest order request for medicine.
+\n 3.	Doctor can prescribe patient via the App and provide an online prescription to the patient. \n"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

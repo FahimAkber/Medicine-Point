@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="#f1f9fa"
     tools:context=".DailyMedicineListAddActivity">
 
     <EditText
         android:id="@+id/et_add_daily_medicine_name"
         android:hint="Name of This Set"
         android:padding="10dp"
-        android:textStyle="bold"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -35,11 +35,11 @@
         <Button
             android:id="@+id/btn_add_daily_medicine"
             android:text="+"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:background="@drawable/et_bg"
-            android:textColor="#647681"
-            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_bg"
+            android:textColor="#5b7784"
+            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -67,9 +67,9 @@
         android:id="@+id/btn_add_daily_medicine_list"
         android:text="Add To List"
         android:textAllCaps="false"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:background="@drawable/button_bg"
-        android:textColor="#647681"
+        android:textColor="#5b7784"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

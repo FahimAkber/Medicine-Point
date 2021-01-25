@@ -40,7 +40,7 @@ public class ShopBasedOrdersActivity extends AppCompatActivity {
 
         init();
 
-        actionBar.setTitle("Today's Order");
+        actionBar.setTitle("My Orders");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         getOrders();
@@ -88,8 +88,11 @@ public class ShopBasedOrdersActivity extends AppCompatActivity {
             } else if(allOrders.get(position).getStatus().equals("Requested")){
                 tvStatus.setTextColor(Color.parseColor("#ccfa1414"));
                 tvStatus.setText(allOrders.get(position).getStatus());
-            } else if(allOrders.get(position).getStatus().equals("Processing")){
+            } else if(allOrders.get(position).getStatus().equals("Accepted")){
                 tvStatus.setTextColor(Color.parseColor("#cc14fa4e"));
+                tvStatus.setText(allOrders.get(position).getStatus());
+            } else if(allOrders.get(position).getStatus().equals("Canceled")){
+                tvStatus.setTextColor(Color.parseColor("#000000"));
                 tvStatus.setText(allOrders.get(position).getStatus());
             }
 

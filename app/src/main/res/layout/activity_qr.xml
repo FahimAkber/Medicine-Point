@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="#f1f9fa"
+    android:padding="10sp"
     android:layout_height="match_parent"
     tools:context=".QRActivity">
 

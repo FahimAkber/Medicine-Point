@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#f1f9fa"
     android:padding="10dp"
     tools:context=".AcceptedOrderDetailsActivity">
 
@@ -26,13 +27,16 @@
             android:id="@+id/btn_accepted_order"
             android:background="@drawable/button_bg"
             android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:textColor="#5b7784"
+            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
     </LinearLayout>
 
     <ScrollView
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -41,6 +45,7 @@
             android:id="@+id/tv_accepted_order"
             android:text="Order's Info"
             android:textSize="18sp"
+            android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -50,7 +55,10 @@
     <Button
         android:id="@+id/btn_accepted_deliver"
         android:text="Deliver"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:textColor="#5b7784"
+        android:textAllCaps="false"
         android:background="@drawable/button_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

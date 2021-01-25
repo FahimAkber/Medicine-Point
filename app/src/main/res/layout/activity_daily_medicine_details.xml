@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="#f1f9fa"
     tools:context=".DailyMedicineDetailsActivity">
 
     <ScrollView
@@ -18,6 +19,7 @@
             android:text="Daily Regular Medicine"
             android:textSize="18sp"
             android:gravity="center"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -41,7 +43,8 @@
         <Button
             android:background="@drawable/button_bg"
             android:text="+"
-            android:textSize="26sp"
+            android:textSize="24sp"
+            android:textStyle="bold"
             android:textColor="#5b7784"
             android:id="@+id/btn_daily_medicine_details"
             android:layout_width="wrap_content"

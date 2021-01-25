@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="#f1f9fa"
     android:layout_height="match_parent"
     tools:context=".PatientPrescriptionDetailsActivity">
 
@@ -17,6 +18,7 @@
             android:id="@+id/tv_patient_pres_details"
             android:text=" Hello From Here!!"
             android:gravity="center"
+            android:layout_gravity="center"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -27,9 +29,10 @@
         android:id="@+id/btn_patient_pres_details"
         android:layout_marginTop="5dp"
         android:text="Order To"
-        android:textSize="18sp"
-        android:textColor="#898484"
-        android:background="@drawable/et_bg"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textColor="#5b7784"
+        android:background="@drawable/button_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

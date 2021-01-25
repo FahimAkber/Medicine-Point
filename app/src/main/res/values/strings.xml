@@ -13,7 +13,7 @@
     <string-array name="patient_content">
         <item>New Order</item>
         <item>Order List</item>
-        <item>My Prescription</item>
+        <item>Prescription</item>
         <item>Daily Medicine</item>
     </string-array>
 
